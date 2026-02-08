@@ -146,9 +146,14 @@
         }
 
         .animate-on-scroll {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .animate-on-scroll.will-animate {
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
         }
 
         .animate-on-scroll.visible {
@@ -867,7 +872,21 @@
         <p style="font-size: 0.75rem; margin-top: 0.5rem; opacity: 0.6;">Институт фиксации пространств<br>Архивируется медленно</p>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
+        // Добавляем класс will-animate только элементам, которые ниже экрана
+        document.addEventListener('DOMContentLoaded', () => {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            elements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
+                
+                // Если элемент НЕ в viewport при загрузке - добавляем will-animate
+                if (!isInViewport) {
+                    el.classList.add('will-animate');
+                }
+            });
+        });
+
         // Intersection Observer для анимаций при скролле
         const observerOptions = {
             threshold: 0.1,
@@ -875,12 +894,10 @@
         };
 
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
+            entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                    // Добавляем небольшую задержку для последовательной анимации
-                    setTimeout(() => {
-                        entry.target.classList.add('visible');
-                    }, index * 100);
+                    entry.target.classList.add('visible');
+                    entry.target.classList.remove('will-animate');
                 }
             });
         }, observerOptions);
@@ -912,3 +929,12 @@
                     const scrolled = window.pageYOffset;
                     const heroImage = document.querySelector('.hero-image');
                     if (heroImage && scrolled < window.innerHeight) {
+                        heroImage.style.transform = `translateY(${scrolled * 0.5}px)`;
+                    }
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+    </script></body>
+</html>
