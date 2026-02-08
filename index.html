@@ -351,6 +351,16 @@
             color: var(--color-text);
         }
 
+        .process-note {
+            margin-top: 4rem;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            color: var(--color-muted);
+            opacity: 0.7;
+        }
+
         /* Boundary Section */
         .boundary {
             padding: 8vh 4rem;
@@ -426,33 +436,6 @@
             object-fit: cover;
             transition: transform 0.6s ease;
             filter: grayscale(20%);
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
-
-        .gallery-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 3rem;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
-            color: white;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .gallery-item:hover .gallery-overlay {
-            opacity: 1;
-        }
-
-        .gallery-caption {
-            font-size: 1rem;
-            font-weight: 300;
-            letter-spacing: 0.05em;
-            opacity: 0.9;
         }
 
         /* Editor Voice Section */
@@ -686,7 +669,7 @@
         <ul class="nav-links">
             <li><a href="#philosophy">ФИЛОСОФИЯ</a></li>
             <li><a href="#charter">УСТАВ</a></li>
-            <li><a href="#projects">ПРОЕКТЫ</a></li>
+            <li><a href="#archive">АРХИВ</a></li>
             <li><a href="#contact">КОНТАКТ</a></li>
         </ul>
     </nav>
@@ -731,6 +714,8 @@
                     <p>Фиксация проекта в журнале и архиве института</p>
                 </div>
             </div>
+            
+            <p class="process-note animate-on-scroll">Форматы участия не обсуждаются публично.</p>
         </div>
     </section>
 
@@ -749,31 +734,13 @@
     </section>
 
     <!-- Gallery Section -->
-    <section class="gallery" id="projects">
+    <section class="gallery" id="archive-gallery">
         <div class="gallery-grid">
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800&q=80" alt="">
-                <div class="gallery-overlay">
-                    <div class="gallery-caption">Свет через дерево и стекло</div>
-                </div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=800&q=80" alt="">
-                <div class="gallery-overlay">
-                    <div class="gallery-caption">Линия между внутренним и внешним</div>
-                </div>
-            </div>
-            <div class="gallery-item">
                 <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=800&q=80" alt="">
-                <div class="gallery-overlay">
-                    <div class="gallery-caption">Пустота как решение</div>
-                </div>
             </div>
             <div class="gallery-item">
                 <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=80" alt="">
-                <div class="gallery-overlay">
-                    <div class="gallery-caption">Место, где время замедляется</div>
-                </div>
             </div>
         </div>
     </section>
@@ -877,7 +844,7 @@
     </section>
 
     <!-- Archive Section -->
-    <section class="archive">
+    <section class="archive" id="archive">
         <div class="archive-content">
             <div class="section-label">АРХИВ</div>
             <p>
@@ -891,15 +858,16 @@
     <section class="contact" id="contact">
         <h2>Присутствие в Atlas — по приглашению</h2>
         <p>Мы фиксируем проекты, которые совпали с редакционной позицией. Если вы чувствуете совпадение — формат участия найдётся.</p>
-        <a href="mailto:contact@atlas-archive.com" class="contact-email">contact@atlas-archive.com</a>
+        <a href="/cdn-cgi/l/email-protection#c7a4a8a9b3a6a4b387a6b3aba6b4eaa6b5a4afaeb1a2e9a4a8aa" class="contact-email"><span class="__cf_email__" data-cfemail="a1c2cecfd5c0c2d5e1c0d5cdc0d28cc0d3c2c9c8d7c48fc2cecc">[email&#160;protected]</span></a>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>© 2026 ATLAS — ИНСТИТУТ ФИКСАЦИИ</p>
+        <p>© ATLAS</p>
+        <p style="font-size: 0.75rem; margin-top: 0.5rem; opacity: 0.6;">Институт фиксации пространств<br>Архивируется медленно</p>
     </footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Intersection Observer для анимаций при скролле
         const observerOptions = {
             threshold: 0.1,
@@ -944,13 +912,3 @@
                     const scrolled = window.pageYOffset;
                     const heroImage = document.querySelector('.hero-image');
                     if (heroImage && scrolled < window.innerHeight) {
-                        heroImage.style.transform = `translateY(${scrolled * 0.5}px)`;
-                    }
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        });
-    </script>
-</body>
-</html>
